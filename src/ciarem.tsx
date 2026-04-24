@@ -17,7 +17,7 @@ const App = () => {
   const ciaremItems2: PreviewItem[] = [
     {
       id: '2',
-      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/comp_Desktop%20Platform.png',
+      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/fixed_comp_Desktop%20Platform.png',
       alt: 'Desktop Platform Preview',
     }
   ];
