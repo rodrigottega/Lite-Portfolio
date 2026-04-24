@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import { LoadingScreen } from './loading-screen';
 
 const ACCESS_CODE = "7799";
 
@@ -201,8 +202,18 @@ function initLockScreen() {
     }, 50);
   };
 
+  const Orchestrator = () => {
+    const [screen, setScreen] = useState<'locked' | 'loading'>('locked');
+
+    if (screen === 'locked') {
+      return <LockScreen onUnlock={() => setScreen('loading')} />;
+    }
+
+    return <LoadingScreen onFinish={handleUnlock} />;
+  };
+
   const root = createRoot(rootDiv);
-  root.render(<LockScreen onUnlock={handleUnlock} />);
+  root.render(<Orchestrator />);
 }
 
 if (typeof window !== 'undefined') {
