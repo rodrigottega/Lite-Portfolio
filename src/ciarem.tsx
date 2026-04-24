@@ -9,7 +9,7 @@ const App = () => {
   const ciaremItems1: PreviewItem[] = [
     {
       id: '1',
-      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/CLink%E2%84%A2%20End%20Users%20Experience.png',
+      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/comp_CLink%E2%84%A2%20End%20Users%20Experience.png',
       alt: 'CIarem Work Preview',
     }
   ];
@@ -17,7 +17,7 @@ const App = () => {
   const ciaremItems2: PreviewItem[] = [
     {
       id: '2',
-      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/Desktop%20Platform.png',
+      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/comp_Desktop%20Platform.png',
       alt: 'Desktop Platform Preview',
     }
   ];

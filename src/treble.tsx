@@ -9,7 +9,7 @@ const App = () => {
   const trebleItems1: PreviewItem[] = [
     {
       id: '1',
-      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/Advanced.png',
+      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/comp_Advanced.png',
       alt: 'Advanced AI Agent Configuration',
     }
   ];
@@ -17,7 +17,7 @@ const App = () => {
   const trebleItems2: PreviewItem[] = [
     {
       id: '2',
-      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/Basic.png',
+      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/comp_Basic.png',
       alt: 'Basic AI Agent Configuration',
     }
   ];
@@ -25,7 +25,7 @@ const App = () => {
   const trebleItems3: PreviewItem[] = [
     {
       id: '3',
-      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/Voice.png',
+      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/comp_Voice.png',
       alt: 'Voice AI Agent Configuration',
     }
   ];
@@ -33,7 +33,7 @@ const App = () => {
   const trebleItems4: PreviewItem[] = [
     {
       id: '4',
-      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/New%20Conv.png',
+      src: 'https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/comp_New%20Conv.png',
       alt: 'New Conversations Sending Flow',
     }
   ];
