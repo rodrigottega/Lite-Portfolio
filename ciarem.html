@@ -402,6 +402,16 @@
             }
         }
     </style>
+    <script>
+        if (sessionStorage.getItem("portfolio-unlocked") !== "true") {
+            document.documentElement.classList.add('locked');
+        }
+    </script>
+    <style>
+        html.locked body > *:not(script):not(#lock-screen-root) {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
     <div class="page-wrapper">
@@ -452,5 +462,6 @@
     
     <div id="preview-modal-root"></div>
     <script type="module" src="/src/ciarem.tsx"></script>
+    <script type="module" src="/src/lock-screen.tsx"></script>
 </body>
 </html>
