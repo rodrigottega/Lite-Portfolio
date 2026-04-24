@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treble.ai - Rodrigo Torres Ortega</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #FFFFFF;
+            -webkit-font-smoothing: antialiased;
+            color: #181B1F;
+            min-height: 100vh;
+        }
+
+        .page-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 64px 0; /* Horizontal padding handled inner elements to allow full-bleed scroll */
+            display: flex;
+            flex-direction: column;
+            gap: 56px;
+            overflow-x: hidden;
+        }
+
+        .page-content {
+            padding: 0 64px;
+        }
+
+        /* TOP RIGHT BUTTONS */
+        .nav-actions {
+            position: absolute;
+            right: 64px;
+            top: 64px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            z-index: 10;
+        }
+
+        .btn {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            background: #FFFFFF;
+            border: 1px solid #D5DBE0;
+            box-shadow: 0px 1px 2px rgba(137, 150, 163, 0.14), 0px 0px 2px rgba(137, 150, 163, 0.12);
+            border-radius: 9999px;
+            color: #181B1F;
+            text-decoration: none;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            background: #F8FAFC;
+        }
+
+        .btn--main {
+            height: 48px;
+            padding: 0 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .btn--icon {
+            width: 48px;
+            height: 48px;
+        }
+
+        .btn--icon i {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .btn-wrapper {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .tooltip {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            gap: 8px;
+            position: absolute;
+            top: 100%;
+            margin-top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.28), 0px 0px 2px rgba(0, 0, 0, 0.24);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #FFFFFF;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            white-space: nowrap;
+            z-index: 100;
+        }
+
+        .btn-wrapper:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* HEADER */
+        .header-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            width: 679px;
+            max-width: 100%;
+        }
+
+        .header-info__logo {
+            height: 31px;
+            width: auto;
+        }
+
+        .job-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .job-info__top {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .job-title {
+            font-family: 'Georgia', serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 46px;
+            letter-spacing: -1.2px;
+            color: #181B1F;
+        }
+
+        .company-info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .company-info p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 16px;
+            color: #6B7682;
+        }
+
+        .company-info a {
+            color: #6B7682;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .company-info a:hover,
+        .company-info a:hover i {
+            color: #181B1F;
+        }
+
+        .company-info i {
+            color: #6B7682;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .job-desc {
+            font-family: 'Geist', sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 32px;
+            color: #6B7682;
+        }
+
+        /* CARDS HORIZONTAL SCROLL */
+        .carousel-container {
+            width: 100%;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 0 64px 32px 64px; /* padding-bottom to allow shadow or just general space */
+            margin-top: 56px;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .images-carousel {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 24px;
+            width: max-content;
+        }
+
+        .image-card {
+            position: relative;
+            background-color: #F5F9FF;
+            border-radius: 20px;
+            width: 601.75px;
+            height: 504px;
+            background-size: cover; /* o auto dependiendo de la imagen, probemos 580px */
+            background-size: 600px;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+            flex: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .image-card:hover {
+                transform: translateY(-6px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .image-card {
+                transition: none;
+            }
+            .image-card:hover {
+                transform: none;
+            }
+        }
+
+        .image-card--1 {
+            background-image: url('https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/Advanced%20AI%20Agent%20Configuration.png');
+        }
+
+        .image-card--2 {
+            background-image: url('https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/Basic%20AI%20Agent%20Configuration.png');
+        }
+
+        .image-card--3 {
+            background-image: url('https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/Voice%20AI%20Agent%20Configuration.png');
+        }
+
+        .image-card--4 {
+            background-image: url('https://cdn.jsdelivr.net/gh/rodrigottega/assets@main/New%20Conversations%20Sending%20Flow.png');
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 2px 8px;
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            height: 28px;
+            background: #FAFBFC;
+            border: 1px solid #D5DBE0;
+            border-radius: 9999px;
+            box-sizing: border-box;
+        }
+
+        .badge span {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #181B1F;
+        }
+
+        /* PREVIEW MODAL STYLES (Figma Match) */
+        .preview-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background-color: #FAFBFC; /* A bit different for light mode maybe, or keep white */
+            background-image: radial-gradient(#D5D5DE 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            background-position: 0 0;
+            color: #000;
+        }
+        .preview-modal__canvas-wrapper {
+            width: 100% !important;
+            height: 100vh !important;
+            cursor: grab;
+        }
+        .preview-modal__canvas-wrapper:active {
+            cursor: grabbing;
+        }
+        .preview-modal__close {
+            position: absolute;
+            top: 64px;
+            right: 64px;
+            z-index: 100;
+            width: 169px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #FFFFFF;
+            border: 1px solid #D5DBE0;
+            box-shadow: 0px 1px 2px rgba(137, 150, 163, 0.14), 0px 0px 2px rgba(137, 150, 163, 0.12);
+            border-radius: 9999px;
+            cursor: pointer;
+            color: #181B1F;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .preview-modal__close-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .zoom-slider {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: 300px;
+            height: 52px;
+            background: #FFFFFF;
+            border: 1px solid #F2F5F7;
+            box-shadow: 0px 4px 8px rgba(137, 150, 163, 0.14), 0px 0px 2px rgba(137, 150, 163, 0.12);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 12px;
+        }
+        .zoom-slider__input {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: #D5DBE0;
+            border-radius: 9999px;
+            outline: none;
+        }
+        .zoom-slider__input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #181B1F;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .zoom-slider__value {
+            width: 36px;
+            text-align: right;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 14px;
+            color: #6B7682;
+        }
+
+        /* RESPONSIVE */
+        .preview-modal__canvas {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .preview-modal__item {
+            display: block;
+            max-width: none;
+        }
+
+        @media (max-width: 1024px) {
+            .page-wrapper {
+                padding: 32px 0;
+            }
+            .page-content {
+                padding: 0 24px;
+            }
+            .carousel-container {
+                padding: 0 24px 32px 24px;
+            }
+            .nav-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-right: 24px;
+                margin-bottom: 24px;
+                align-self: flex-end;
+            }
+            .image-card {
+                width: 300px;
+                height: 400px;
+                background-size: cover;
+                background-position: left top;
+            }
+            .header-info {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        
+        <div class="nav-actions">
+            <a href="index.html" class="btn btn--main">Main page</a>
+            <div class="btn-wrapper">
+                <a href="ciarem.html" class="btn btn--icon"><i class="ri-arrow-right-line"></i></a>
+                <div class="tooltip">Next Project</div>
+            </div>
+        </div>
+
+        <main>
+            <div class="page-content">
+                <div class="header-info">
+                    <img src="https://cdn.prod.website-files.com/69ead29f89acb48c62e80c52/69ead9e3b25d4dce72c8a6ad_treble__logo__001.svg" class="header-info__logo" alt="treble logo">
+                    
+                    <div class="job-info">
+                        <div class="job-info__top">
+                            <h1 class="job-title">Senior Designer — AI Agents & Platform Core</h1>
+                            
+                            <div class="company-info">
+                                <p>Treble.ai · 2021–present</p>
+                            </div>
+                        </div>
+
+                        <p class="job-desc">
+                            I own AI design end to end at Treble.ai — from agents configuration to prompt UX to how the model feels when it responds. After our last release, 80% of users who had left for n8n came back.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-container">
+                <div class="images-carousel">
+                    <div class="image-card image-card--1">
+                        <div class="badge">
+                            <span>Advanced AI Agent Configuration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="image-card image-card--2">
+                        <div class="badge">
+                            <span>Basic AI Agent Configuration</span>
+                        </div>
+                    </div>
+
+                    <div class="image-card image-card--3">
+                        <div class="badge">
+                            <span>Voice AI Agent Configuration</span>
+                        </div>
+                    </div>
+
+                    <div class="image-card image-card--4">
+                        <div class="badge">
+                            <span>New Conversations Sending Flow</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+    
+    <div id="preview-modal-root"></div>
+    <script type="module" src="/src/treble.tsx"></script>
+</body>
+</html>
