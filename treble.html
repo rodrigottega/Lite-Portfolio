@@ -129,6 +129,13 @@
             visibility: visible;
         }
 
+        .tooltip--top {
+            top: auto;
+            bottom: 100%;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
         /* HEADER */
         .header-info {
             display: flex;
@@ -363,8 +370,34 @@
             border-radius: 16px;
             display: flex;
             align-items: center;
-            padding: 0 24px;
-            gap: 12px;
+            padding: 16px 24px 16px 6px;
+            gap: 16px;
+            box-sizing: border-box;
+        }
+        .zoom-slider__reset {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            min-width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #181B1F;
+            font-size: 20px;
+            position: relative;
+        }
+        .zoom-slider__reset:hover {
+            background: #F5F6F7;
+        }
+        .zoom-slider__wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            flex-grow: 1;
         }
         .zoom-slider__input {
             flex-grow: 1;

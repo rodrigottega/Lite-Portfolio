@@ -101,7 +101,7 @@ export function PreviewModal({ isOpen, onClose, items }: PreviewModalProps) {
 }
 
 function ZoomSlider() {
-  const { setTransform } = useControls();
+  const { setTransform, resetTransform } = useControls();
   const context = useTransformContext();
 
   // Estado local sincronizado con el scale real
@@ -128,17 +128,30 @@ function ZoomSlider() {
 
   return (
     <div className="zoom-slider">
-      <input
-        type="range"
-        min={10}
-        max={200}
-        step={1}
-        value={sliderValue}
-        onChange={handleSliderChange}
-        className="zoom-slider__input"
-        aria-label="Zoom level"
-      />
-      <span className="zoom-slider__value">{sliderValue}%</span>
+      <div className="btn-wrapper">
+        <button 
+          className="zoom-slider__reset" 
+          onClick={() => resetTransform()} 
+          type="button"
+          aria-label="Center canvas"
+        >
+          <i className="ri-crosshair-2-line"></i>
+        </button>
+        <div className="tooltip tooltip--top">Center canvas</div>
+      </div>
+      <div className="zoom-slider__wrapper">
+        <input
+          type="range"
+          min={10}
+          max={200}
+          step={1}
+          value={sliderValue}
+          onChange={handleSliderChange}
+          className="zoom-slider__input"
+          aria-label="Zoom level"
+        />
+        <span className="zoom-slider__value">{sliderValue}%</span>
+      </div>
     </div>
   );
 }
